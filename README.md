@@ -62,7 +62,7 @@ Sistema web desenvolvido em Laravel para gerenciamento escolar, permitindo cadas
 - Exibição de aluno, turma e notas
 - Média final
 - Resultado final
-- 
+   
 ---
 
 # Estrutura do Banco de Dados
