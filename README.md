@@ -220,8 +220,19 @@ http://127.0.0.1:8000
 
 ---
 
-## S
+## Exemplos Visuais (Telas)
 
+<img width="1919" height="943" alt="1" src="https://github.com/user-attachments/assets/a4979f78-7dfa-4a72-8101-d5dc034a0dd2" />
+
+<img width="1919" height="936" alt="2" src="https://github.com/user-attachments/assets/e7622a82-a0bc-42f0-af61-18466579389e" />
+
+<img width="1919" height="941" alt="3" src="https://github.com/user-attachments/assets/0a40222c-e40c-4de4-956e-964ec6790729" />
+
+<img width="1919" height="939" alt="4" src="https://github.com/user-attachments/assets/9ebdf79f-cb36-4122-91ef-003aec2f39f7" />
+
+<img width="1919" height="939" alt="5" src="https://github.com/user-attachments/assets/51e9accc-6074-4d0b-920a-5eefe921335f" />
+
+<img width="1919" height="940" alt="6" src="https://github.com/user-attachments/assets/c8416abe-fc6f-4efd-9a6b-c5509267d32d" />
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
