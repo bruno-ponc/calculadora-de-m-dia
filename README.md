@@ -1,3 +1,228 @@
+# Sistema Escolar - Gestão de Notas (Laravel)
+
+Sistema web desenvolvido em Laravel para gerenciamento escolar, permitindo cadastro de alunos, turmas, lançamento de notas, cálculo automático de médias, recuperação e controle de fechamento de turmas.
+
+---
+
+# Tecnologias Utilizadas
+
+- PHP 8+
+- Laravel 12+
+- MySQL
+- Bootstrap 5
+- Blade (Laravel)
+- HTML5
+- CSS3
+
+---
+
+# Funcionalidades
+
+## Alunos
+- Cadastro de alunos
+- Listagem de alunos cadastrados
+
+---
+
+## Turmas
+- Cadastro de turmas
+- Listagem de turmas
+- Fechamento de turma
+- Bloqueio de edição após fechamento
+
+---
+
+## Notas
+- Cadastro de 4 notas por aluno
+- Seleção de aluno e turma
+- Cálculo automático da média
+
+---
+
+## Sistema de Avaliação
+
+| Média | Conceito | Situação |
+|------|----------|----------|
+| ≥ 9 | A | Aprovado com louvor |
+| ≥ 7 | B | Aluno aprovado |
+| ≥ 4 | C | Recuperação |
+| < 4 | D | Reprovado |
+
+---
+
+## Recuperação
+- Lançamento de nota de recuperação
+- Regra:
+  - Se (média + recuperação ≥ 10) → Aprovado
+  - Caso contrário → Reprovado
+
+---
+
+## Boletim
+- Exibição de aluno, turma e notas
+- Média final
+- Resultado final
+- 
+---
+
+# Estrutura do Banco de Dados
+
+## Tabelas
+
+### alunos
+- id
+- nome
+- created_at
+- updated_at
+
+---
+
+### turmas
+- id
+- nome
+- fechada (boolean)
+- created_at
+- updated_at
+
+---
+
+### notas
+- id
+- aluno_id
+- turma_id
+- nota1
+- nota2
+- nota3
+- nota4
+- media
+- conceito
+- recuperacao
+- resultado_final
+- created_at
+- updated_at
+
+---
+
+# Relacionamentos
+
+- Um aluno pode ter várias notas
+- Uma nota pertence a um aluno
+- Uma nota pertence a uma turma
+
+---
+
+## Instalação do projeto
+
+### 1. Clonar o repositório
+
+```bash
+git clone https://github.com/seu-usuario/sistema-escolar.git
+cd sistema-escolar
+```
+
+### 2. Instalar dependências PHP
+
+```bash
+composer install
+```
+
+### 3. Configurar o ambiente
+
+Copie o arquivo de exemplo do ambiente:
+
+```bash
+cp .env.example .env
+```
+
+Gere a chave da aplicação:
+
+```bash
+php artisan key:generate
+```
+
+### 4. Configurar o banco de dados
+
+Abra o arquivo `.env` e ajuste as configurações abaixo:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=escola_media
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Criar o banco de dados
+
+No MySQL, execute:
+
+```sql
+CREATE DATABASE escola_media;
+```
+
+### 6. Executar migrations
+
+```bash
+php artisan migrate
+```
+
+### 7. Popular o banco de dados
+
+Opcionalmente, você pode inserir dados iniciais com:
+
+```bash
+php artisan db:seed
+```
+
+### 8. Iniciar o servidor
+
+```bash
+php artisan serve
+```
+
+Acesse no navegador:
+
+```bash
+http://127.0.0.1:8000
+```
+
+## Telas do sistema
+
+- Cadastro de alunos.
+- Cadastro de turmas.
+- Cadastro de notas.
+- Boletim do aluno.
+- Resultado da média.
+- Recuperação.
+- Resumo geral.
+- Controle de turmas.
+
+## Regras de negócio
+
+- Um aluno pode estar em várias turmas.
+- As notas pertencem ao aluno e à turma.
+- Turma fechada não permite edição.
+- A média é calculada automaticamente.
+- A recuperação pode alterar o resultado final.
+
+## Interface
+
+- Layout responsivo com Bootstrap 5.
+- Interface adaptada para mobile e desktop.
+
+## Segurança e validações
+
+- Proteção CSRF ativa.
+- Validação de formulários.
+- Bloqueio de edição em turma fechada.
+- Controle de integridade no banco de dados.
+
+---
+
+## S
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
