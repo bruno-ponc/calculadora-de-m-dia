@@ -18,9 +18,10 @@
 
 </head>
 
+
 <body>
 
-    <!-- NAVBAR -->
+    
 
     <nav class="navbar navbar-expand-lg navbar-dark">
 
@@ -110,16 +111,30 @@
 
     </nav>
 
-    <!-- CONTEÚDO -->
+    
 
-    <div class="container py-4">
+    <main class="container py-4 flex-grow-1">
 
         @yield('content')
 
-    </div>
+</main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
+<footer class="footer mt-5">
+
+    <main class="container text-center">
+
+        <p class="mb-0">
+
+            © 2026 Sistemas de Informação | Desenvolvimento de Aplicações para WEB II
+
+        </p>
+
+</main>
+
+</footer>
 
 </html>
