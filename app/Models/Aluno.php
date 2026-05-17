@@ -11,11 +11,6 @@ class Aluno extends Model
         'turma_id'
     ];
 
-    public function turma()
-    {
-        return $this->belongsTo(Turma::class);
-    }
-
     public function nota()
     {
         return $this->hasOne(Nota::class);

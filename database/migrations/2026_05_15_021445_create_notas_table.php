@@ -11,29 +11,45 @@ return new class extends Migration
      */
     public function up()
     {
-    Schema::create('notas', function (Blueprint $table) {
+        Schema::create('notas', function (Blueprint $table) {
 
-        $table->id();
+            $table->id();
 
-        $table->foreignId('aluno_id')
-              ->constrained()
-              ->onDelete('cascade');
+            // ALUNO
 
-        $table->double('nota1');
-        $table->double('nota2');
-        $table->double('nota3');
-        $table->double('nota4');
+            $table->foreignId('aluno_id')
+                  ->constrained()
+                  ->onDelete('cascade');
 
-        $table->double('media')->nullable();
+            // TURMA
 
-        $table->string('conceito')->nullable();
+            $table->foreignId('turma_id')
+                  ->constrained()
+                  ->onDelete('cascade');
 
-        $table->double('recuperacao')->nullable();
+            // NOTAS
 
-        $table->string('resultado_final')->nullable();
+            $table->double('nota1');
 
-        $table->timestamps();
-    });
+            $table->double('nota2');
+
+            $table->double('nota3');
+
+            $table->double('nota4');
+
+            // RESULTADOS
+
+            $table->double('media')->nullable();
+
+            $table->string('conceito')->nullable();
+
+            $table->double('recuperacao')->nullable();
+
+            $table->string('resultado_final')->nullable();
+
+            $table->timestamps();
+
+        });
     }
 
     /**

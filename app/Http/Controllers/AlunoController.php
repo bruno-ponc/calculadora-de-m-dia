@@ -10,9 +10,9 @@ class AlunoController extends Controller
 {
     public function create()
     {
-        $turmas = Turma::all();
+        $alunos = Aluno::all();
 
-        return view('alunos.create', compact('turmas'));
+        return view('alunos.create', compact('alunos'));
     }
 
     public function store(Request $request)

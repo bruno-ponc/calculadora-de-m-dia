@@ -51,7 +51,7 @@
 
                     <td>
 
-                        {{ $nota->aluno->turma->nome }}
+                        {{ $nota->turma->nome }}
 
                     </td>
 

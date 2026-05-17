@@ -23,12 +23,6 @@ class NotaController extends Controller
 
     public function store(Request $request)
     {
-        $aluno = Aluno::findOrFail($request->aluno_id);
-
-        $aluno->turma_id = $request->turma_id;
-
-        $aluno->save();
-
         $media = (
             $request->nota1 +
             $request->nota2 +
@@ -58,6 +52,7 @@ class NotaController extends Controller
 
         $nota = Nota::create([
             'aluno_id' => $request->aluno_id,
+            'turma_id' => $request->turma_id,
             'nota1' => $request->nota1,
             'nota2' => $request->nota2,
             'nota3' => $request->nota3,
@@ -94,7 +89,7 @@ class NotaController extends Controller
 
     public function index()
     {
-    $notas = Nota::with('aluno.turma')->get();
+    $notas = Nota::with('aluno', 'turma')->get();
 
     return view('notas.index',
         compact('notas'));
@@ -102,7 +97,7 @@ class NotaController extends Controller
 
     public function resumo()
     {
-        $notas = Nota::with('aluno.turma')->get();
+        $notas = Nota::with('aluno', 'turma')->get();
 
         $turmas = Turma::all();
 
@@ -114,7 +109,7 @@ class NotaController extends Controller
     {
     $nota = Nota::findOrFail($id);
 
-    if($nota->aluno->turma->fechada)
+    if($nota->turma->fechada)
     {
         return redirect('/resumo')
             ->with('erro',
@@ -129,7 +124,7 @@ class NotaController extends Controller
     {
         $nota = Nota::findOrFail($id);
 
-        if($nota->aluno->turma->fechada)
+        if($nota->turma->fechada)
         {
             return redirect('/resumo')
                 ->with('erro',

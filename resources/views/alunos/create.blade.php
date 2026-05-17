@@ -2,37 +2,114 @@
 
 @section('content')
 
-<div class="card p-4 shadow">
+<div class="row justify-content-center">
 
-    <h2>Cadastrar Aluno</h2>
+    <div class="col-12 col-lg-6 mb-4">
 
-    @if(session('success'))
+        <div class="card p-4">
 
-        <div class="alert alert-success">
+            <h2 class="mb-4 text-center">
 
-            {{ session('success') }}
+                Cadastro de Alunos
+
+            </h2>
+
+            @if(session('success'))
+
+                <div class="alert alert-success">
+
+                    {{ session('success') }}
+
+                </div>
+
+            @endif
+
+            <form action="/alunos/store"
+                  method="POST">
+
+                @csrf
+
+                <div class="mb-4">
+
+                    <input type="text"
+                           name="nome"
+                           class="form-control"
+                           placeholder="Nome do aluno"
+                           required>
+
+                </div>
+
+                <button class="btn btn-primary w-100">
+
+                    Cadastrar Aluno
+
+                </button>
+
+            </form>
 
         </div>
 
-    @endif
+    </div>
 
-    <form action="/alunos/store"
-          method="POST">
+    <!-- ALUNOS CADASTRADOS -->
 
-        @csrf
+    <div class="col-12 col-lg-6">
 
-        <input type="text"
-               name="nome"
-               class="form-control"
-               placeholder="Nome do Aluno">
+        <div class="card p-4">
 
-        <button class="btn btn-primary mt-3">
+            <h3 class="card-title mb-4">
 
-            Salvar
+                Alunos Cadastrados
 
-        </button>
+            </h3>
 
-    </form>
+            <div class="table-responsive">
+
+                <table class="table table-hover">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Aluno</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach($alunos as $aluno)
+
+                            <tr>
+
+                                <td>
+
+                                    {{ $aluno->id }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ $aluno->nome }}
+
+                                </td>
+
+                            </tr>
+
+                        @endforeach
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

@@ -14,10 +14,43 @@
 
             </h2>
 
-            <form action="/notas/store"
-                  method="POST">
+            <form action="{{ route('notas.store') }}" method="POST">
 
                 @csrf
+
+                                <div class="mb-4">
+
+                    <label class="form-label">
+
+                        Aluno
+
+                    </label>
+
+                    <select name="aluno_id"
+                            class="form-select"
+                            required>
+
+                        <option value=""
+                                selected
+                                disabled>
+
+                            Selecione um aluno
+
+                        </option>
+
+                        @foreach($alunos as $aluno)
+
+                            <option value="{{ $aluno->id }}">
+
+                                {{ $aluno->nome }}
+
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                </div>
 
                 <div class="mb-3">
 
@@ -53,39 +86,6 @@
 
                 </div>
 
-                <div class="mb-4">
-
-                    <label class="form-label">
-
-                        Aluno
-
-                    </label>
-
-                    <select name="aluno_id"
-                            class="form-select"
-                            required>
-
-                        <option value=""
-                                selected
-                                disabled>
-
-                            Selecione um aluno
-
-                        </option>
-
-                        @foreach($alunos as $aluno)
-
-                            <option value="{{ $aluno->id }}">
-
-                                {{ $aluno->nome }}
-
-                            </option>
-
-                        @endforeach
-
-                    </select>
-
-                </div>
 
                 <div class="row">
 

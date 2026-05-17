@@ -9,7 +9,9 @@ class TurmaController extends Controller
 {
     public function create()
     {
-        return view('turmas.create');
+        $turmas = Turma::all();
+
+        return view('turmas.create', compact('turmas'));
     }
 
     public function store(Request $request)

@@ -56,7 +56,7 @@
 
                                 <td>
 
-                                    {{ $nota->aluno->turma->nome }}
+                                    {{ $nota->turma->nome }}
 
                                 </td>
 
@@ -68,7 +68,7 @@
 
                                 <td>
 
-                                    @if(!$nota->aluno->turma->fechada)
+                                    @if($nota->turma && !$nota->turma->fechada)
 
                                         <a href="/notas/edit/{{ $nota->id }}"
                                            class="btn btn-primary btn-sm">

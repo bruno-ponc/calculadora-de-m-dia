@@ -24,8 +24,8 @@ Route::post('/alunos/store',
 Route::get('/notas/create',
     [NotaController::class, 'create']);
 
-Route::post('/notas/store',
-    [NotaController::class, 'store']);
+Route::post('/notas/store', [NotaController::class, 'store'])
+    ->name('notas.store');
 
 Route::post('/notas/recuperacao/{id}',
     [NotaController::class, 'recuperacao']);

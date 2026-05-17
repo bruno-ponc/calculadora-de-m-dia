@@ -24,6 +24,7 @@
             <label>Nota da Recuperação</label>
 
             <input type="number"
+                    required
                    step="0.1"
                    name="recuperacao"
                    class="form-control">
