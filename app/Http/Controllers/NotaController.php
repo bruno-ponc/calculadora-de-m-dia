@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Turma;
 use App\Models\Aluno;
 use App\Models\Nota;
 use Illuminate\Http\Request;
@@ -9,14 +10,25 @@ use Illuminate\Http\Request;
 class NotaController extends Controller
 {
     public function create()
-    {
+{
         $alunos = Aluno::all();
 
-        return view('notas.create', compact('alunos'));
-    }
+        $turmas = \App\Models\Turma::all();
+
+    return view(
+        'notas.create',
+        compact('alunos', 'turmas')
+    );
+}
 
     public function store(Request $request)
     {
+        $aluno = Aluno::findOrFail($request->aluno_id);
+
+        $aluno->turma_id = $request->turma_id;
+
+        $aluno->save();
+
         $media = (
             $request->nota1 +
             $request->nota2 +
@@ -27,21 +39,21 @@ class NotaController extends Controller
         $conceito = '';
         $mensagem = '';
 
-        if ($media > 9) {
+        if ($media >= 9) {
             $conceito = 'A';
             $mensagem = 'Aprovado com Louvor';
         }
-        elseif ($media > 7) {
+        elseif ($media >= 7) {
             $conceito = 'B';
             $mensagem = 'Aluno Aprovado';
         }
-        elseif ($media > 4) {
+        elseif ($media >= 4) {
             $conceito = 'C';
-            $mensagem = 'Recuperação, sua chance de passar';
+            $mensagem = 'Recuperação, Sua Chance de Passar';
         }
         else {
             $conceito = 'D';
-            $mensagem = 'Poxa vida, vamos tentar novamente ano que vem';
+            $mensagem = 'Poxa Vida, Vamos Tentar Novamente Ano Que Vem';
         }
 
         $nota = Nota::create([
@@ -70,13 +82,128 @@ class NotaController extends Controller
         $soma = $nota->media + $nota->recuperacao;
 
         if ($soma >= 10) {
-            $nota->resultado_final = 'Aluno aprovado na recuperação';
+            $nota->resultado_final = 'Aluno Aprovado na Recuperação';
         } else {
-            $nota->resultado_final = 'Aluno reprovado';
+            $nota->resultado_final = 'Aluno Reprovado';
         }
 
         $nota->save();
 
         return view('notas.recuperacao_resultado', compact('nota'));
+    }
+
+    public function index()
+    {
+    $notas = Nota::with('aluno.turma')->get();
+
+    return view('notas.index',
+        compact('notas'));
+    }
+
+    public function resumo()
+    {
+        $notas = Nota::with('aluno.turma')->get();
+
+        $turmas = Turma::all();
+
+        return view('notas.resumo',
+            compact('notas', 'turmas'));
+    }
+
+    public function edit($id)
+    {
+    $nota = Nota::findOrFail($id);
+
+    if($nota->aluno->turma->fechada)
+    {
+        return redirect('/resumo')
+            ->with('erro',
+            'Turma Fechada!');
+    }
+
+    return view('notas.edit',
+        compact('nota'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $nota = Nota::findOrFail($id);
+
+        if($nota->aluno->turma->fechada)
+        {
+            return redirect('/resumo')
+                ->with('erro',
+                'Turma Fechada!');
+        }
+
+        $media = (
+            $request->nota1 +
+            $request->nota2 +
+            $request->nota3 +
+            $request->nota4
+        ) / 4;
+
+        $recuperacao = $request->recuperacao;
+
+        if ($media >= 9) {
+
+            $conceito = 'A';
+
+            $mensagem = 'Aprovado Com Louvor';
+
+        }
+        elseif ($media >= 7) {
+
+            $conceito = 'B';
+
+            $mensagem = 'Aluno Aprovado';
+
+        }
+        elseif ($media >= 4) {
+
+            $conceito = 'C';
+
+            if($recuperacao &&
+            ($media + $recuperacao) >= 10)
+            {
+                $mensagem =
+                    'Aprovado na Recuperação';
+            }
+            else
+            {
+                $mensagem =
+                    'Reprovado na Recuperação';
+            }
+
+        }
+        else {
+
+            $conceito = 'D';
+
+            $mensagem =
+                'Poxa Vida, Vamos Tentar Novamente Ano Que Vem';
+
+        }
+
+        $nota->update([
+
+            'nota1' => $request->nota1,
+            'nota2' => $request->nota2,
+            'nota3' => $request->nota3,
+            'nota4' => $request->nota4,
+
+            'recuperacao' => $recuperacao,
+
+            'media' => $media,
+
+            'conceito' => $conceito,
+
+            'resultado_final' => $mensagem
+
+        ]);
+
+        return redirect('/resumo')
+            ->with('success',
+            'Notas atualizadas!');
     }
 }

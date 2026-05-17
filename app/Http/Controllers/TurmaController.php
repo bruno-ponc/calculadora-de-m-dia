@@ -2,19 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Turma;
 
 class TurmaController extends Controller
 {
+    public function create()
+    {
+        return view('turmas.create');
+    }
+
+    public function store(Request $request)
+    {
+        Turma::create([
+            'nome' => $request->nome
+        ]);
+
+        return redirect('/turmas/create')
+            ->with('success',
+            'Turma Cadastrada!');
+    }
+
     public function fechar($id)
-{
-    $turma = Turma::findOrFail($id);
+    {
+        $turma = Turma::findOrFail($id);
 
-    $turma->fechada = true;
+        $turma->fechada = true;
 
-    $turma->save();
+        $turma->save();
 
-    return back();
-}
+        return back();
+    }
 }

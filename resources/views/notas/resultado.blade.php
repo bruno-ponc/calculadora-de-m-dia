@@ -36,6 +36,13 @@
 
     @endif
 
+    <a href="/"
+       class="btn btn-primary mt-4">
+
+        Voltar ao Menu
+
+    </a>
+
 </div>
 
 @endsection

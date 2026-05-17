@@ -17,8 +17,9 @@ return new class extends Migration
         $table->string('nome');
 
         $table->foreignId('turma_id')
-              ->constrained()
-              ->onDelete('cascade');
+        ->nullable()
+        ->constrained()
+        ->onDelete('cascade');
 
         $table->timestamps();
     });
