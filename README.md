@@ -116,7 +116,7 @@ Sistema web desenvolvido em Laravel para gerenciamento escolar, permitindo cadas
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/sistema-escolar.git
+git clone https://github.com/seu-usuario/sistema-calculadora-media-escolar.git
 cd sistema-escolar
 ```
 
